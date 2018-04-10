@@ -5,7 +5,7 @@ class CreateDestinations < ActiveRecord::Migration
       t.text :description
       t.string :city
       t.string :state
-      t.string :address
+      t.string :street_address
 
       t.timestamps null: false
     end
