@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  resources :user_cars
+  resources :cars
+  resources :destination_tags
+  resources :destination_road_trips
+  resources :comments
+  resources :user_road_trips
+  resources :tags
+  resources :destinations
+  resources :road_trips
+  resources :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

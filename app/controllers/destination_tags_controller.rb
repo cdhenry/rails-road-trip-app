@@ -1,0 +1,2 @@
+class DestinationTagsController < ApplicationController
+end

@@ -1,0 +1,2 @@
+module DestinationTagsHelper
+end
