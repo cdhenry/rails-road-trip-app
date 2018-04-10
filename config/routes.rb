@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :pictures
   resources :user_cars
   resources :cars
   resources :destination_tags
