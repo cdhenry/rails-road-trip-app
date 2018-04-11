@@ -43,10 +43,10 @@
               <%= link_to "Select a Road Trip", road_trips_path, {class: "dropdown-item"} if current_user.current_trip.nil?%>
               <%= link_to "Current Trip", road_trip_path(current_user.current_trip), {class: "dropdown-item"} if current_user.current_trip%>
               <%= link_to "Profile", user_path(current_user), {class: "dropdown-item"} %>
-          <!--    <%= link_to "Compare", user_path(current_user), {class: "dropdown-item"} %>-->
+          <!--<%= link_to "Compare", user_path(current_user), {class: "dropdown-item"} %>-->
               <%= link_to "Account", edit_user_registration_path(current_user), {class: "dropdown-item"} %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Log Out", destroy_user_session_path(current_user), {method: :delete, class: "dropdown-item"} %>
+              <%= link_to "Log Out", destroy_user_session_url, {method: :delete, class: "dropdown-item"} %>
             </div>
           </li>
         <% end %>

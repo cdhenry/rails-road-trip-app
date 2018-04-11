@@ -1,5 +1,9 @@
 module UserRoadTripsHelper
    def trip_completed(road_trip)
-     #current_user.id user_road_trips && date_completed
+     trip = UserRoadTrip.where(road_trip_id: road_trip.id).where(user_id: current_user.id)
+     if !trip.empty?
+       !!trip.first.date_completed
+     end
    end
 end
+  

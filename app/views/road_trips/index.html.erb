@@ -1,4 +1,4 @@
-<h1>Road Trips</h1>
+<h1>Road Trips </h1>
 
 <table class="table table-hover">
   <thead>
@@ -13,7 +13,12 @@
   <tbody>
     <% @road_trips.each do |road_trip| %>
       <tr class="table-active">
-        <td><%= trip_completed(road_trip) if trip_completed(road_trip) %></td>
+        <td><% if trip_completed(road_trip) %>
+          <span class='badge badge-pill badge-primary'>X</span>
+          <% elsif current_user.current_trip == road_trip %>
+          <span class='badge badge-pill badge-primary'>In Process</span>
+          <% end %>
+        </td>
         <td><%= link_to road_trip.title, road_trip_path(road_trip) %></td>
         <td><%= road_trip.description %></td>
         <td><%= road_trip.total_miles %></td>
