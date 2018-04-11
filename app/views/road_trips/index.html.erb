@@ -3,6 +3,7 @@
 <table class="table table-hover">
   <thead>
     <tr>
+      <th scope="col">Completed</th>
       <th scope="col">Title</th>
       <th scope="col">Description</th>
       <th scope="col">Miles</th>
@@ -12,7 +13,8 @@
   <tbody>
     <% @road_trips.each do |road_trip| %>
       <tr class="table-active">
-        <th scope="row"><%= link_to road_trip.title, road_trip_path(road_trip) %></th>
+        <td><%= trip_completed(road_trip) if trip_completed(road_trip) %></td>
+        <td><%= link_to road_trip.title, road_trip_path(road_trip) %></td>
         <td><%= road_trip.description %></td>
         <td><%= road_trip.total_miles %></td>
         <td><%= road_trip.total_destinations %></td>
