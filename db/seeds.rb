@@ -35,7 +35,6 @@ models_by_make = {
   Tag.create(
     title: Faker::Hipster.word
   )
-  binding.pry
   make = makes.sample
   model = models_by_make[make].sample
   Car.create(
