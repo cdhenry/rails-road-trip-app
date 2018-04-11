@@ -18,35 +18,24 @@ class RoadTripsController < ApplicationController
   def create
     @road_trip = RoadTrip.new(road_trip_params)
 
-    respond_to do |format|
-      if @road_trip.save
-        format.html { redirect_to @road_trip, notice: 'Road Trip was successfully created.' }
-        format.json { render :show, status: :created, location: @road_trip }
-      else
-        format.html { render :new }
-        format.json { render json: @road_trip.errors, status: :unprocessable_entity }
-      end
+    if @road_trip.save
+      redirect_to @road_trip
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @road_trip.update(road_trip_params)
-        format.html { redirect_to @road_trip, notice: 'Road Trip was successfully updated.' }
-        format.json { render :show, status: :ok, location: @road_trip }
-      else
-        format.html { render :edit }
-        format.json { render json: @road_trip.errors, status: :unprocessable_entity }
-      end
+    if @road_trip.update(road_trip_params)
+      redirect_to @road_trip
+    else
+      render :edit
     end
   end
 
   def destroy
     @road_trip.destroy
-    respond_to do |format|
-      format.html { redirect_to road_trips_url, notice: 'Road Trip was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to road_trips_url
   end
 
   private
