@@ -45,22 +45,14 @@ models_by_make = {
   User.create(
     username: Faker::Internet.user_name,
     email: Faker::Internet.email,
-    password: Faker::Internet.password(6),
+    password: "password",
     miles_driven: rand(100..200000),
     current_car_id: rand(1..10),
     current_trip_id: rand(1..10)
   )
-  DestinationRoadTrip.create(
-    destination_id: rand(1..10),
-    road_trip_id: rand(1..10)
-  )
 end
 
-2.times do
-  DestinationTag.create(
-    destination_id: rand(1..10),
-    tag_id: rand(1..10)
-  )
+20.times do
   UserCar.create(
     user_id: rand(1..10),
     car_id: rand(1..10)
@@ -69,6 +61,14 @@ end
     user_id: rand(1..10),
     road_trip_id: rand(1..10),
     date_completed: Faker::Date.between(10.years.ago, Date.today)
+  )
+  DestinationTag.create(
+    destination_id: rand(1..10),
+    tag_id: rand(1..10)
+  )
+  DestinationRoadTrip.create(
+    destination_id: rand(1..10),
+    road_trip_id: rand(1..10)
   )
 end
 
