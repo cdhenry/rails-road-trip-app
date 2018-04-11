@@ -6,4 +6,12 @@ class Destination < ActiveRecord::Base
   has_many :users, through: :road_trips
   has_many :pictures, as: :imageable
   has_many :comments, as: :commentable
+
+  def city_state
+    "#{self.city}, #{self.state}"
+  end
+
+  def top_tag
+    self.tags[0]
+  end
 end
