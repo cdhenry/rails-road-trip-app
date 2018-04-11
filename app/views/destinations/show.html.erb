@@ -1,25 +1,33 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Destination:</strong>
+  <strong>Destination :</strong>
   <%= @destination.name %>
 </p>
 <p>
-  <strong>Description:</strong>
+  <strong>Description :</strong>
   <%= @destination.description %>
 </p>
 <p>
-  <strong>City:</strong>
+  <strong>City :</strong>
   <%= @destination.city %>
 </p>
 <p>
-  <strong>State:</strong>
+  <strong>State :</strong>
   <%= @destination.state %>
 </p>
 <p>
-  <strong>Street Address:</strong>
+  <strong>Street Address :</strong>
   <%= @destination.street_address %>
 </p>
+<p>
+  <strong>Tags :</strong>
+  <% @destination.tags.each do |tag| %>
+    <%= link_to tag.title, tag_path(tag) %> |
+  <% end %>
+</p>
 
-<%= link_to 'Edit', edit_destination_path(@destination) %> |
+<% if current_user.admin %>
+  <%= link_to 'Edit', edit_destination_path(@destination) %> |
+<% end %>
 <%= link_to 'Back', destinations_path %>
