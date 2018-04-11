@@ -8,11 +8,19 @@
 require 'nokogiri'
 require 'open-uri'
 
-doc = Nokogiri::HTML(open("https://www.motability.co.uk/cars-scooters-and-powerchairs/types-of-cars/by-makes-and-models"))
-
-make = doc.search("tbody td")
-makes = make.children.collect.with_index(1){|make,i| make.text if i.odd?}.compact
-models = make.children.collect.with_index(1){|model,i| model.text if i.even?}.compact
+makes = ["BMW","Audi","Toyota","Chevy","Ford","Dodge","Lincoln","Buic","Honda","Nissan"]
+models_by_make = {
+  "BMW" => ["328i","M3","M5","X1","X3","X5"],
+  "Audi" => ["A4","A5","S5","A7","A8"],
+  "Toyota" => ["Prius","Camry","Corolla"],
+  "Chevy" => ["Camero","Silverado","Malibu"],
+  "Ford" => ["Mustang","F150","Focus","Fiesta"],
+  "Dodge" => ["Ram","Challenger","Charger","Durango"],
+  "Lincoln" => ["Navigator","MKZ","MKX","MKS"],
+  "Buick" => ["Enclave","Regal","LaCrosse","Verano","Encore","Riveria"],
+  "Honda" => ["Accord","Civic","CR-V","Odyssey"],
+  "Nissan" => ["Rogue","Juke","Cube","Pathfiner","Versa","Altima"]
+}
 
 10.times do
   Destination.create(
@@ -30,9 +38,11 @@ models = make.children.collect.with_index(1){|model,i| model.text if i.even?}.co
   Tag.create(
     title: Faker::Hipster.word
   )
+  make = makes.sample
+  model = models_by_make[make].sample
   Car.create(
-    make: makes.sample,
-    model: models.sample,
+    make: make,
+    model: model,
     mpg: rand(20..60)
   )
   User.create(
