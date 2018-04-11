@@ -5,10 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-require 'nokogiri'
-require 'open-uri'
-
-makes = ["BMW","Audi","Toyota","Chevy","Ford","Dodge","Lincoln","Buic","Honda","Nissan"]
+makes = ["BMW","Audi","Toyota","Chevy","Ford","Dodge","Lincoln","Buick","Honda","Nissan"]
 models_by_make = {
   "BMW" => ["328i","M3","M5","X1","X3","X5"],
   "Audi" => ["A4","A5","S5","A7","A8"],
@@ -38,6 +35,7 @@ models_by_make = {
   Tag.create(
     title: Faker::Hipster.word
   )
+  binding.pry
   make = makes.sample
   model = models_by_make[make].sample
   Car.create(
