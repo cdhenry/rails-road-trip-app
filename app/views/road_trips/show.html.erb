@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Road Trip:</strong>
+  <%= @road_trip.title %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @road_trip.description %>
+</p>
+
+<%= link_to 'Edit', edit_road_trip_path(@road_trip) %> |
+<%= link_to 'Back', road_trips_path %>
