@@ -53,7 +53,8 @@ models_by_make = {
     email: Faker::Internet.email,
     password: Faker::Internet.password(6),
     current_trip_id: rand(1..10),
-    current_car_id: rand(1..10)
+    current_car_id: rand(1..10),
+    miles_driven: rand(100..200000)
   )
 end
 

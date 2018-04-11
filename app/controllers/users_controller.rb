@@ -2,7 +2,11 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users = User.all
+    if current_user.admin
+      @users = User.all
+    else
+      @users = User.road_warriors
+    end
   end
 
   def show

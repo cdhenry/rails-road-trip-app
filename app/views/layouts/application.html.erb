@@ -20,8 +20,8 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav mr-auto">
         <% if current_user %>
-          <li class="nav-item">
-            <%= link_to "Stats", user_path(current_user), {class: "nav-link"} %>
+          <li>
+            <%= link_to "Road Warriors", users_path, {class: "nav-link"} %>
           </li>
           <li class="nav-item">
 
@@ -33,10 +33,11 @@
               <%= link_to "Garage", user_garage_path(current_user.current_car), {class: "dropdown-item"}  if current_user.current_car%>
               <%= link_to "Select a Road Trip", road_trips_path, {class: "dropdown-item"} if current_user.current_trip.nil?%>
               <%= link_to "Current Trip", road_trip_path(current_user.current_trip), {class: "dropdown-item"} if current_user.current_trip%>
-              <a class="dropdown-item" href="#">Compare</a>
+              <%= link_to "Profile", user_path(current_user), {class: "dropdown-item"} %>
+          <!--    <%= link_to "Compare", user_path(current_user), {class: "dropdown-item"} %>-->
               <%= link_to "Account", edit_user_registration_path(current_user), {class: "dropdown-item"} %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Log Out", destroy_user_session_path, {method: :delete, class: "dropdown-item"} %>
+              <%= link_to "Log Out", destroy_user_session_path(current_user), {method: :delete, class: "dropdown-item"} %>
             </div>
           </li>
         <% end %>

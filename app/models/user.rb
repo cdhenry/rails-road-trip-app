@@ -21,4 +21,8 @@ class User < ActiveRecord::Base
     @garage = []
     @garage << car
   end
+
+  def self.road_warriors
+    all.order(miles_driven: :desc).limit(10)
+  end
 end
