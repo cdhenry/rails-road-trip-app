@@ -55,6 +55,6 @@ class RoadTripsController < ApplicationController
     end
 
     def road_trip_params
-      params.require(:road_trip).permit(:make, :model)
+      params.require(:road_trip).permit(:title, :description)
     end
 end

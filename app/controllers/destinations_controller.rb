@@ -55,6 +55,6 @@ class DestinationsController < ApplicationController
     end
 
     def destination_params
-      params.require(:destination).permit(:make, :model)
+      params.require(:destination).permit(:name, :description, :city, :state, :street_address)
     end
 end
