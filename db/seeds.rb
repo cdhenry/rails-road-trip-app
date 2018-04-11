@@ -5,12 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.destroy_all
-Destination.destroy_all
-Tag.destroy_all
-RoadTrip.destroy_all
-Car.destroy_all
-
 makes = ["BMW","Audi","Toyota","Chevy","Ford","Dodge","Lincoln","Buick","Honda","Nissan"]
 models_by_make = {
   "BMW" => ["328i","M3","M5","X1","X3","X5"],
@@ -30,7 +24,7 @@ models_by_make = {
     name: Faker::HitchhikersGuideToTheGalaxy.location,
     description: Faker::Hipster.paragraph,
     city: Faker::Address.city,
-    state: Faker::Address.state,
+    state: Faker::Address.state_abbr,
     street_address: Faker::Address.street_address
   )
   RoadTrip.create(
@@ -51,10 +45,7 @@ models_by_make = {
   User.create(
     username: Faker::Internet.user_name,
     email: Faker::Internet.email,
-    password: Faker::Internet.password(6),
-    current_trip_id: rand(1..10),
-    current_car_id: rand(1..10),
-    miles_driven: rand(100..200000)
+    password: Faker::Internet.password(6)
   )
 end
 
