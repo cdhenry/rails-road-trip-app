@@ -12,4 +12,13 @@ class User < ActiveRecord::Base
   has_many :user_cars
   has_many :cars, through: :user_cars
   has_many :pictures, as: :imageable
+
+  def garage
+    @garage
+  end
+
+  def garage=(car)
+    @garage = []
+    @garage << car
+  end
 end

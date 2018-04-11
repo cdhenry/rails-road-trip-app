@@ -1,27 +1,57 @@
-<h1>Listing cars</h1>
+<div class="card mb-3" style="height: 100%; width:49%; float:left; margin:1px">
+  <h3 class="card-header">Garage</h3>
+  <% if current_user.current_car %>
+    <div class="card-body">
+      <h5 class="card-title"><% current_user.current_car.make %></h5>
+      <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+    </div>
+    <img style="height: 100%; width: 100%; display: block;" src="https://www.allcarleasing.co.uk/images/img-placeholder.jpg" alt="Card image">
+    <div class="card-body">
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Cras justo odio</li>
+      <li class="list-group-item">Dapibus ac facilisis in</li>
+      <li class="list-group-item">Vestibulum at eros</li>
+    </ul>
+  <% else %>
+    <div class="card-body">
+      <h5 class="card-title">Add Cars to Your Garage</h5>
+      <h6 class="card-subtitle text-muted">Then Select A Car for a Trip</h6>
+    </div>
+  <% end %>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @cars.each do |car| %>
-      <tr>
-        <td><%= car.make %></td>
-        <td><%= car.model %></td>
-        <td><%= car.mpg %></td>
-        <td><%= link_to 'Show', car %></td>
-        <td><%= link_to 'Edit', edit_car_path(car) %></td>
-        <td><%= link_to 'Destroy', car, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Car', new_car_path %>
+<div class="card mb-3" style="height: 100%; width:49%; float:right">
+  <h3 class="card-header">Car Listings</h3>
+  <div class="card-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Make</th>
+          <th scope="col">Model</th>
+          <th scope="col">Miles Per Gallon</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cars.each do |car| %>
+          <tr class="table-active">
+            <td><%= car.make %></td>
+            <td><%= car.model %></td>
+            <td><%= car.mpg %></td>
+            <td><button type="button" class="btn btn-primary">Add Car to Garage</button></td>
+            <% if current_user.admin %>
+              <td> | <%= link_to 'Show', car %> | </td>
+              <td><%= link_to 'Edit', edit_car_path(car) %> | </td>
+              <td><%= link_to 'Destroy', car, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="card-footer text-muted">
+      <a href="<%= new_car_path %>"><button type="button" class="btn btn-primary btn-lg btn-block">Add A New Car</button></a>
+    </div>
+  </div>
+</div>

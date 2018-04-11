@@ -5,6 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+User.destroy_all
+Destination.destroy_all
+Tag.destroy_all
+RoadTrip.destroy_all
+Car.destroy_all
+
 makes = ["BMW","Audi","Toyota","Chevy","Ford","Dodge","Lincoln","Buick","Honda","Nissan"]
 models_by_make = {
   "BMW" => ["328i","M3","M5","X1","X3","X5"],
@@ -45,7 +51,9 @@ models_by_make = {
   User.create(
     username: Faker::Internet.user_name,
     email: Faker::Internet.email,
-    password: Faker::Internet.password(6)
+    password: Faker::Internet.password(6),
+    current_trip_id: rand(1..10),
+    current_car_id: rand(1..10)
   )
 end
 
