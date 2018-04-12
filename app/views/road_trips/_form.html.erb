@@ -1,27 +1,75 @@
-<%= form_for(@road_trip) do |f| %>
-  <% if @road_trip.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@road_trip.errors.count, "error") %> prohibited this post from being saved:</h2>
+<div class="card mb-3" style="height: 100%; width:49%; float:left; margin:1px">
+  <%= form_for(@road_trip) do |f| %>
+    <% if @road_trip.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@road_trip.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-      <ul>
-      <% @road_trip.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <ul>
+        <% @road_trip.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </div><br>
+
+    <div class="field">
+      <%= f.label :description %><br>
+      <%= f.text_area :description, size: "75x5" %>
+    </div><br>
+
+    <% if @road_trip.destinations %>
+    <%= f.label :destinations %>
+      <ul class="list-group">
+        <% @road_trip.destinations.each_with_index do |destination, i| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <%= destination.name %>
+            <span class="badge badge-primary badge-pill">Stop <%= i %></span>
+          </li>
+        <% end %>
       </ul>
+    <% else %>
+      <%= render 'destinations/form' %>
+    <% end %>
+    <br>
+    <div class="actions">
+      <%= f.submit %>
     </div>
   <% end %>
+</div>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+<div class="card mb-3" style="height: 100%; width:49%; float:right; margin:1px">
+  <h3 class="card-header">Destinations</h3>
+  <div class="card-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">City, State</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @destinations.each do |destination| %>
+          <tr class="table-active">
+            <td><%= destination.name %></td>
+            <td><%= destination.city_state %></td>
+            <td><button type="button" class="btn btn-primary">Add Destination to Trip</button></td>
+            <% if current_user.admin %>
+              <td> | <%= link_to 'Show', car %> | </td>
+              <td><%= link_to 'Edit', edit_car_path(car) %> | </td>
+              <td><%= link_to 'Destroy', car, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="card-footer text-muted">
+      <a href="<%= new_destination_path %>"><button type="button" class="btn btn-primary btn-lg btn-block">Add A New Destination</button></a>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

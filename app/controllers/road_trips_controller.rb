@@ -10,9 +10,11 @@ class RoadTripsController < ApplicationController
 
   def new
     @road_trip = RoadTrip.new
+    @destinations = Destination.all
   end
 
   def edit
+    @destinations = Destination.all
   end
 
   def create
