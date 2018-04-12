@@ -9,5 +9,12 @@
   <%= @road_trip.description %>
 </p>
 
+<p>
+  <strong>Destintions:</strong><br>
+  | <% @road_trip.destinations.each do |destination| %>
+      <%= destination.name %> |
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_road_trip_path(@road_trip) %> |
 <%= link_to 'Back', road_trips_path %>

@@ -46,6 +46,6 @@ class RoadTripsController < ApplicationController
     end
 
     def road_trip_params
-      params.require(:road_trip).permit(:title, :description)
+      params.require(:road_trip).permit(:title, :description, destination_ids:[], destinations_attributes: [:name, :description, :city, :state, :street_address] )
     end
 end

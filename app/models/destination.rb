@@ -7,6 +7,10 @@ class Destination < ActiveRecord::Base
   has_many :pictures, as: :imageable
   has_many :comments, as: :commentable
 
+  def visited
+    self.destination_road_trips.count
+  end
+
   def city_state
     "#{self.city}, #{self.state}"
   end
