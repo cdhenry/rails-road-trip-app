@@ -1,6 +1,6 @@
 <div class="card mb-3">
   <%= form_for(@road_trip) do |f| %>
-  <div class="card mb-3" style="height: 100%; width:49%; float:left; margin:1px">
+  <div class="card mb-3" style="height: 100%; width:46%; float:left; margin:1px">
       <% if @road_trip.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@road_trip.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -32,12 +32,22 @@
               <span class="badge badge-primary badge-pill">Stop <%= destination.stop_order(@road_trip) %></span>
             </li>
           <% end %>
-        </ul><br>
+        </ul>
+      <% end %>
+
+      <ul class="list-group">
+        <%= f.fields_for :destination_road_trips, @road_trip.destination_road_trips.build do |destination_road_trips_fields| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+          <%= destination_road_trips_fields.label :destination_order %>
+          <%= destination_road_trips_fields.number_field :destination_order %><br>
+          </li>
+        <% end %>
+      </ul>
+
       <div class="field">
         <%= f.label :total_miles %><br>
         <%= f.number_field :total_miles %>
       </div>
-      <% end %>
 
       <div class="card-body">
         <h3 class="card-header">Create A New Destination</h3><br>
@@ -57,7 +67,7 @@
       <br>
   </div>
 
-  <div class="card mb-3" style="height: 100%; width:49%; float:right; margin:1px">
+  <div class="card mb-3" style="height: 100%; width:52%; float:right; margin:1px">
     <h3 class="card-header">Destinations</h3>
     <div class="card-body">
       <table class="table table-hover">
@@ -66,6 +76,7 @@
             <th scope="col">Name</th>
             <th scope="col">City, State</th>
             <th scope="col">Add Destination</th>
+            <th scope="col">Stop #</th>
             <th colspan="3"></th>
           </tr>
         </thead>

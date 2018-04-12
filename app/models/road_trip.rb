@@ -10,6 +10,7 @@ class RoadTrip < ActiveRecord::Base
   has_many :pictures, as: :imageable
   has_many :comments, as: :commentable
   accepts_nested_attributes_for :destinations
+  accepts_nested_attributes_for :destination_road_trips
 
   def total_miles
   end
