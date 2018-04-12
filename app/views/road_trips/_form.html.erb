@@ -1,6 +1,7 @@
 <div class="card mb-3">
   <%= form_for(@road_trip) do |f| %>
   <div class="card mb-3" style="height: 100%; width:46%; float:left; margin:1px">
+    <div class="card-body">
       <% if @road_trip.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@road_trip.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -13,66 +14,70 @@
         </div>
       <% end %>
 
-      <div class="field">
+      <div class="form-group">
         <%= f.label :title %><br>
         <%= f.text_field :title %>
       </div><br>
 
-      <div class="field">
+      <div class="form-group">
         <%= f.label :description %><br>
-        <%= f.text_area :description, size: "75x5" %>
+        <%= f.text_area :description, size: "70x5" %>
       </div><br>
 
       <% if !@road_trip.destinations.empty? %>
-        <%= f.label :destinations %>
-        <%= f.fields_for :destination_road_trips do |destination_road_trips_fields| %>
-          <%= destination_road_trips_fields.fields_for :destination do |destination_fields| %>
-            <ul class="list-group">
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <%= destination_fields.object.name %>
-                <span class="badge badge-primary" style="width:20%">
-                  <%= destination_road_trips_fields.label :destination_order, "Stop # :" %>
-                  <%= destination_road_trips_fields.number_field :destination_order, style: 'width: 50%;' %>
-                </span>
-              </li>
-            </ul>
-          <% end %>
-        <% end %>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Destination</th>
+              <th scope="col">Remove</th>
+              <th scope="col"><center>Stop</center></th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= f.fields_for :destination_road_trips do |drts_fields| %>
+            <%binding.pry%>
+              <tr>
+                <th><%= destination_finder(drts_fields).name %></th>
+                <td><center><%= drts_fields.check_box :_destroy %></center></td>
+                <td><center><%= drts_fields.number_field :destination_order,  style: 'width: 20%;' %></center></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       <% end %>
-
-      <div class="field">
+      <br>
+      <div class="form-group">
         <%= f.label :total_miles %><br>
         <%= f.number_field :total_miles %>
       </div>
-
-      <div class="card-body">
-        <h3 class="card-header">Create A New Destination</h3><br>
-        <%= f.fields_for :destinations, @road_trip.destinations.build do |destinations_fields| %>
-          <%= destinations_fields.label :name %>
-          <%= destinations_fields.text_field :name %><br>
-          <%= destinations_fields.label :description %>
-          <%= destinations_fields.text_area :description, size: "75x5" %>
-          <%= destinations_fields.label :city %>
-          <%= destinations_fields.text_field :city %>
-          <%= destinations_fields.label :state %>
-          <%= destinations_fields.text_field :state %><br>
-          <%= destinations_fields.label :street_address %>
-          <%= destinations_fields.text_field :street_address %>
-        <% end %>
-      </div>
-      <br>
-  </div>
+    </div>
+    <div class="card-body">
+      <h3 class="card-header">Create A New Destination</h3><br>
+      <%= f.fields_for :destinations, @road_trip.destinations.build do |destinations_fields| %>
+        <%= destinations_fields.label :name %>
+        <%= destinations_fields.text_field :name %><br>
+        <%= destinations_fields.label :description %>
+        <%= destinations_fields.text_area :description, size: "75x5" %>
+        <%= destinations_fields.label :city %>
+        <%= destinations_fields.text_field :city %>
+        <%= destinations_fields.label :state %>
+        <%= destinations_fields.text_field :state %><br>
+        <%= destinations_fields.label :street_address %>
+        <%= destinations_fields.text_field :street_address %>
+      <% end %>
+    </div>
+  <br>
+</div>
 
   <div class="card mb-3" style="height: 100%; width:52%; float:right; margin:1px">
-    <h3 class="card-header">Destinations</h3>
+    <h3 class="card-header">Add Destinations</h3>
     <div class="card-body">
       <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">Name</th>
             <th scope="col">City, State</th>
-            <th scope="col">Add Destination</th>
-            <th scope="col">Stop #</th>
+            <th scope="col">Add</th>
             <th colspan="3"></th>
           </tr>
         </thead>
