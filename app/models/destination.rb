@@ -14,4 +14,9 @@ class Destination < ActiveRecord::Base
   def top_tag
     self.tags[0]
   end
+
+  def stop_order(road_trip)
+    trip = self.destination_road_trips.where(road_trip_id: road_trip.id).first
+    trip.destination_order ||= 0
+  end
 end

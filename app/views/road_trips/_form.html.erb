@@ -25,10 +25,10 @@
     <% if @road_trip.destinations %>
     <%= f.label :destinations %>
       <ul class="list-group">
-        <% @road_trip.destinations.each_with_index do |destination, i| %>
+        <% @road_trip.destinations.each do |destination| %>
           <li class="list-group-item d-flex justify-content-between align-items-center">
             <%= destination.name %>
-            <span class="badge badge-primary badge-pill">Stop <%= i %></span>
+            <span class="badge badge-primary badge-pill">Stop <%= destination.stop_order(@road_trip) %></span>
           </li>
         <% end %>
       </ul>
