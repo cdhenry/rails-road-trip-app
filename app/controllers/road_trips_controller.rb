@@ -29,6 +29,7 @@ class RoadTripsController < ApplicationController
 
   def update
     if @road_trip.update(road_trip_params)
+      binding.pry
       redirect_to @road_trip
     else
       render :edit
@@ -46,6 +47,10 @@ class RoadTripsController < ApplicationController
     end
 
     def road_trip_params
-      params.require(:road_trip).permit(:title, :description, destination_ids:[], destinations_attributes: [:name, :description, :city, :state, :street_address] )
+      params.require(:road_trip).permit(
+        :title, :description, :total_miles,
+        destination_ids:[], destinations_attributes: [:name, :description, :city, :state, :street_address],
+        destination_road_trips_attributes:[:destination_order, destination_attributes:[:id]]
+        )
     end
 end

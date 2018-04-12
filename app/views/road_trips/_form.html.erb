@@ -24,25 +24,21 @@
       </div><br>
 
       <% if !@road_trip.destinations.empty? %>
-      <%= f.label :destinations %>
-        <ul class="list-group">
-          <% @road_trip.destinations.each do |destination| %>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <%= destination.name %>
-              <span class="badge badge-primary badge-pill">Stop <%= destination.stop_order(@road_trip) %></span>
-            </li>
+        <%= f.label :destinations %>
+        <%= f.fields_for :destination_road_trips do |destination_road_trips_fields| %>
+          <%= destination_road_trips_fields.fields_for :destination do |destination_fields| %>
+            <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <%= destination_fields.object.name %>
+                <span class="badge badge-primary" style="width:20%">
+                  <%= destination_road_trips_fields.label :destination_order, "Stop # :" %>
+                  <%= destination_road_trips_fields.number_field :destination_order, style: 'width: 50%;' %>
+                </span>
+              </li>
+            </ul>
           <% end %>
-        </ul>
-      <% end %>
-
-      <ul class="list-group">
-        <%= f.fields_for :destination_road_trips, @road_trip.destination_road_trips.build do |destination_road_trips_fields| %>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-          <%= destination_road_trips_fields.label :destination_order %>
-          <%= destination_road_trips_fields.number_field :destination_order %><br>
-          </li>
         <% end %>
-      </ul>
+      <% end %>
 
       <div class="field">
         <%= f.label :total_miles %><br>
@@ -94,7 +90,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Create Road Trip", class: "btn btn-primary btn-lg btn-block"%>
+    <%= f.submit class: "btn btn-primary btn-lg btn-block"%>
     <% end %>
   </div>
 </div>
