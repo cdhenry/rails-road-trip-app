@@ -1,4 +1,9 @@
 class RoadTrip < ActiveRecord::Base
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :total_miles, presence: true
+  validates :author_id, presence: true
+
   has_many :user_road_trips
   has_many :users, through: :user_road_trips
   has_many :destination_road_trips
