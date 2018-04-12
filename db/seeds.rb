@@ -30,7 +30,8 @@ models_by_make = {
   RoadTrip.create(
     author_id: rand(1..10),
     title: Faker::Book.title,
-    description: Faker::Hipster.paragraph
+    description: Faker::Hipster.paragraph,
+    total_miles: rand(200..2000)
   )
   Tag.create(
     title: Faker::Hipster.word
@@ -68,7 +69,8 @@ end
   )
   DestinationRoadTrip.create(
     destination_id: rand(1..10),
-    road_trip_id: rand(1..10)
+    road_trip_id: rand(1..10),
+    destination_order: rand(1..10)
   )
 end
 
