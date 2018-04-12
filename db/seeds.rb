@@ -72,7 +72,6 @@ end
   )
 end
 
-
 #
 # counter = 1
 # Item.all.each do |item|
