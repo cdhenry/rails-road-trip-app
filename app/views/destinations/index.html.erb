@@ -1,4 +1,4 @@
-<h1>Destinations</h1>
+<h1>Destinations <%= link_to 'Create New Destination', new_destination_path, {class: "btn btn-primary"} %> </h1>
 
 <table class="table table-hover">
   <thead>
@@ -15,7 +15,11 @@
         <th scope="row"><%= link_to destination.name, destination_path(destination) %></th>
         <td><%= destination.description %></td>
         <td><%= destination.city_state %></td>
-        <td><%= link_to destination.top_tag.title, tag_path(destination.top_tag) unless destination.tags.empty? %></td>
+        <td>
+          <% destination.tags.each do |tag| %>
+            <%= link_to tag.title, tag_path(tag) %>,
+          <% end %>
+        </td>
         <% if current_user.admin %>
           <td><%= link_to 'Show', destination %></td>
           <td><%= link_to 'Edit', edit_destination_path(destination) %></td>
@@ -25,8 +29,3 @@
     <% end %>
   </tbody>
 </table>
-<br>
-
-<br>
-
-<%= link_to 'Create New Destination', new_destination_path %>

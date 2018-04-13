@@ -11,27 +11,33 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description, size: "75x5" %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br>
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :state %><br>
-    <%= f.text_field :state %>
-  </div>
-  <div class="field">
-    <%= f.label :street_address %><br>
-    <%= f.text_field :street_address %>
-  </div>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
 
+  <%= f.label :description %><br>
+  <%= f.text_area :description, size: "75x5" %><br>
+
+  <%= f.label :city %>
+  <%= f.text_field :city %> ,
+
+  <%= f.label :state %>
+  <%= f.text_field :state %><br>
+
+  <%= f.label :street_address %>
+  <%= f.text_field :street_address %><br><br>
+
+  <h6 class="card-subtitle text-muted">Add a descriptive tag or two to this destination, so people know what this place is like.</h6><br>
+
+  <%= f.fields_for :tags, f.object.tags.build do |tags_fields| %>
+    <%= tags_fields.label :tag_1 %>
+    <%= tags_fields.text_field :title %><br>
+    <%= tags_fields.label :tag_2 %>
+    <%= tags_fields.text_field :title %><br>
+    <%= tags_fields.label :tag_3 %>
+    <%= tags_fields.text_field :title %>
+  <% end %>
+
+  <br><br>
   <div class="actions">
     <%= f.submit %>
   </div>
