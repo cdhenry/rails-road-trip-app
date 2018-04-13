@@ -12,8 +12,7 @@ class RoadTrip < ActiveRecord::Base
   has_many :pictures, as: :imageable
   has_many :comments, as: :commentable
   accepts_nested_attributes_for :destinations
-  accepts_nested_attributes_for :destination_road_trips, allow_destroy: true
-  #reject_if: lambda {|a| a[:destination_order].blank? || a[:destination_order].to_i < 0 || a[:destination_order].to_i > a.length},
+  accepts_nested_attributes_for :destination_road_trips
 
   def total_destinations
     self.destinations.size
@@ -29,19 +28,13 @@ class RoadTrip < ActiveRecord::Base
   end
 
   def destination_road_trips_attributes=(destination_road_trips_attributes)
-    destination_road_trips_attributes.values.each do |destination_road_trip_attribute|
-      destination_road_trip = DestinationRoadTrip.find_or_initialize_by(destination_road_trip_attribute[:destination_id])
-
-      if destination_road_trip_attribute[:destination_order].to_i >= 0 && destination_road_trip_attribute[:destination_order].to_i <= destination_road_trips_attributes.length
-        destination_road_trip.destination_order = destination_road_trip_attribute[:destination_order].to_i
-      else
-        destination_road_trip.destination_order = nil
+    trips_to_update = destination_road_trips_attributes.values.select {|destination_road_trip_attribute| !destination_road_trip_attribute[:id].nil?}
+    trips_to_update.each do |drt|
+      if drt[:destination_order].to_i >= 0 && drt[:destination_order].to_i <= trips_to_update.length
+        if !DestinationRoadTrip.where(id: drt[:id]).empty?
+          DestinationRoadTrip.where(id: drt[:id]).first.update(destination_order: drt[:destination_order])
+        end
       end
-      destination_road_trip.save
-      # binding.pry
-      # if destination_road_trip.save
-      #   self.destination_road_trips << destination_road_trip
-      # end
     end
   end
 end
