@@ -16,6 +16,17 @@ class RoadTripsController < ApplicationController
 
   def edit
     @destinations = Destination.all
+    # binding.pry
+    # @destinations.sort_by do |destination| 
+    #   destination.destination_road_trips.each do |drt|
+    #     if drt.road_trip_id == @road_trip.id
+    #       drt.destination_order
+    #     end
+    #   end 
+    # end
+    # binding.pry
+    # @trip_destinations = Destination.include(:destination_road_trips).where(road_trip_id: @road_trip.id) 
+    # @other_destinations = Destination.include(:destination_road_trips).where.not(road_trip_id: @road_trip.id)
   end
 
   def create
