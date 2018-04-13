@@ -2,7 +2,7 @@ module UserRoadTripsHelper
    def trip_completed(road_trip)
      trip = UserRoadTrip.where(road_trip_id: road_trip.id).where(user_id: current_user.id)
      if !trip.empty?
-       !!trip.first.date_completed
+       !!trip.first.completed
      end
    end
 
@@ -13,5 +13,9 @@ module UserRoadTripsHelper
      else
        UserRoadTrip.new(road_trip_id: road_trip.id, user_id: user.id)
      end
+   end
+
+   def road_trip_finder(road_trip_id)
+     RoadTrip.find(road_trip_id)
    end
 end
