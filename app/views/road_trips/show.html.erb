@@ -16,5 +16,7 @@
   <% end %>
 </p>
 
-<%= link_to 'Edit', edit_road_trip_path(@road_trip) %> |
+<% if current_user.id == @road_trip.author_id %>
+  <%= link_to 'Edit', edit_road_trip_path(@road_trip) %> |
+<% end %>
 <%= link_to 'Back', road_trips_path %>

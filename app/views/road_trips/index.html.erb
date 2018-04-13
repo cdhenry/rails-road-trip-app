@@ -8,6 +8,11 @@
       <th scope="col">Description</th>
       <th scope="col">Miles</th>
       <th scope="col">Destinations</th>
+      <% if current_user.admin %>
+        <th scope="col" colspan="3"><center>Edit User Trips</center></th>
+      <% else %>
+        <th scope="col" colspan="3"><center>Edit Your Trips</center></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -22,11 +27,13 @@
         <td><%= link_to road_trip.title, road_trip_path(road_trip) %></td>
         <td><%= road_trip.description %></td>
         <td><%= road_trip.total_miles %></td>
-        <td><%= road_trip.total_destinations %></td>
-        <% if current_user.admin %>
+        <td><center><%= road_trip.total_destinations %></center></td>
+        <% if current_user.admin || road_trip.author_id == current_user.id %>
           <td><%= link_to 'Show', road_trip %></td>
           <td><%= link_to 'Edit', edit_road_trip_path(road_trip) %></td>
           <td><%= link_to 'Destroy', road_trip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+          <td colspan="3"></td>
         <% end %>
       </tr>
     <% end %>

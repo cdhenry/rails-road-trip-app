@@ -13,6 +13,7 @@ class RoadTrip < ActiveRecord::Base
   has_many :comments, as: :commentable
   accepts_nested_attributes_for :destinations
   accepts_nested_attributes_for :destination_road_trips
+  accepts_nested_attributes_for :tags
 
   def total_destinations
     self.destinations.size

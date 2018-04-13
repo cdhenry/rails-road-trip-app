@@ -12,6 +12,7 @@ class Destination < ActiveRecord::Base
   has_many :users, through: :road_trips
   has_many :pictures, as: :imageable
   has_many :comments, as: :commentable
+  accepts_nested_attributes_for :tags
 
   def visited
     self.destination_road_trips.count

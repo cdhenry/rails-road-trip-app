@@ -95,6 +95,8 @@
     </div>
   </div>
 
+  <%= f.hidden_field :author_id, value: current_user.id %>
+
   <div class="actions">
     <%= f.submit class: "btn btn-primary btn-lg btn-block"%>
     <% end %>
