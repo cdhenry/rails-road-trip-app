@@ -4,6 +4,10 @@ class Tag < ActiveRecord::Base
   has_many :destination_tags
   has_many :destinations, through: :destination_tags
 
+  def self.popularity_ordered
+    joins(:destination_tags).group("destination_tags.tag_id").order("COUNT(destination_tags.tag_id) DESC")
+  end
+
   def popularity
     self.destinations.count
   end

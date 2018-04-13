@@ -1,16 +1,18 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Tag:</strong>
-  <%= @tag.title %>
-</p>
-<p>
-  <strong>Destinations :</strong>
-  <% @tag.destinations.each do |destination| %>
-    <%= link_to destination.name, destination_path(destination) %> |
-  <% end %>
-</p>
-<% if current_user.admin %>
-  <%= link_to 'Edit', edit_tag_path(@tag) %> |
-<% end %>
-<%= link_to 'Back', tags_path %>
+<div class="card mb-3">
+  <h3 class="card-header"><%= @tag.title %></h3>
+  <div class="card-body">
+    <h5 class="card-title">Destinations that have this tag:</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+    <% @tag.destinations.each do |destination| %>
+      <li class="list-group-item"><%= link_to destination.name, destination_path(destination) %></li>
+    <% end %>
+  </ul>
+  <div class="card-footer text-muted">
+    <% if current_user.admin %>
+      <%= link_to 'Edit', edit_tag_path(@tag) %> |
+    <% end %>
+    <%= link_to 'Back', tags_path %>
+  </div>
+</div>
