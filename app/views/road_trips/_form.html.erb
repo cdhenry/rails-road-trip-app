@@ -35,9 +35,8 @@
           </thead>
           <tbody>
             <%= f.fields_for :destination_road_trips do |drts_fields| %>
-            <%binding.pry%>
               <tr>
-                <th><%= destination_finder(drts_fields).name %></th>
+                <th><%= destination_finder(drts_fields).name %><%= drts_fields.hidden_field :destination_id %></th>
                 <td><center><%= drts_fields.check_box :_destroy %></center></td>
                 <td><center><%= drts_fields.number_field :destination_order,  style: 'width: 20%;' %></center></td>
               </tr>

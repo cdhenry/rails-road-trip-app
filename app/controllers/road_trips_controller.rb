@@ -1,5 +1,6 @@
 class RoadTripsController < ApplicationController
   before_action :set_road_trip, only: [:show, :edit, :update, :destroy]
+  #before_action :set_destinations, only: [:new, :edit, :update]
 
   def index
     @road_trips = RoadTrip.all
@@ -28,6 +29,7 @@ class RoadTripsController < ApplicationController
   end
 
   def update
+    @destinations = Destination.all
     if @road_trip.update(road_trip_params)
       redirect_to @road_trip
     else
@@ -45,11 +47,15 @@ class RoadTripsController < ApplicationController
       @road_trip = RoadTrip.find(params[:id])
     end
 
+    # def set_destinations
+    #   @destinations = Destination.all
+    # end
+
     def road_trip_params
       params.require(:road_trip).permit(
         :title, :description, :total_miles,
         destination_ids:[], destinations_attributes: [:name, :description, :city, :state, :street_address],
-        destination_road_trips_attributes:[:destination_order, :_destroy]
+        destination_road_trips_attributes:[:destination_id, :destination_order, :_destroy]
         )
     end
 end
