@@ -11,12 +11,13 @@
 
 <p>
   <strong>Destinations:</strong><br>
-  | <% @road_trip.destinations.each do |destination| %>
-      <%= destination.name %> |
+| <% @road_trip.destination_road_trips.order(:destination_order).each do |destination_road_trip| %>
+    <%= drt_destination_finder(destination_road_trip).name %> |
   <% end %>
 </p>
 
 <% if current_user.id == @road_trip.author_id %>
   <%= link_to 'Edit', edit_road_trip_path(@road_trip) %> |
 <% end %>
+
 <%= link_to 'Back', road_trips_path %>
