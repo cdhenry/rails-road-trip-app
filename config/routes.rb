@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :tags
   resources :destinations
   resources :road_trips
-  resources :users
+  resources :users, path: 'user/profiles'
 
   #get '/auth/github/callback' => 'sessions#create'
   # The priority is based upon order of creation: first created -> highest priority.
