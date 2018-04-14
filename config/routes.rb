@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
   root :to => "welcome#home"
-  devise_for :users
-    devise_scope :user do
-    get "/sign_out", :to => "devise/sessions#destroy"
-  end
+  devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
   resources :pictures
   resources :user_cars
   resources :cars
@@ -15,6 +12,8 @@ Rails.application.routes.draw do
   resources :destinations
   resources :road_trips
   resources :users
+
+  #get '/auth/github/callback' => 'sessions#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
