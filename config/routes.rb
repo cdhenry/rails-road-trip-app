@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root :to => "welcome#home"
   devise_for :users
+    devise_scope :user do
+    get "/sign_out", :to => "devise/sessions#destroy"
+  end
   resources :pictures
   resources :user_cars
   resources :cars

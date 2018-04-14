@@ -14,9 +14,9 @@
         <td><%= tag.popularity %></td>
         <td><%= link_to tag.last_destination.name, destination_path(tag.last_destination) if tag.last_destination %></td>
         <% if current_user.admin %>
-          <td><%= link_to 'Show', user %></td>
-          <td><%= link_to 'Edit', edit_user_path(user) %></td>
-          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Show', tag %></td>
+          <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
+          <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
     <% end %>

@@ -47,7 +47,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      binding.pry
       params.require(:user).permit(:username, :current_trip_id, user_road_trips: [:completed])
     end
 end
